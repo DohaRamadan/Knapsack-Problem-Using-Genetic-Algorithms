@@ -18,7 +18,7 @@ bool sortByFitness(Individual& a, Individual& b){
 vector<pair<int, int>> weights;
 vector<Individual> currentGeneration, offsprings;
 int knapscakWeight, itemsNum;
-const int POP_SIZE = 20, MAX_GENERATION = 30;
+const int POP_SIZE = 100, MAX_GENERATION = 1000;
 const float PC = 0.6, PM = 0.1;
 
 vector<Individual> InitializePopulation(){
@@ -156,6 +156,7 @@ Individual GA(){
 
 int main() {
     freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     int t;
     cin >> t;
     for (int i = 0; i < t; ++i) {
@@ -173,5 +174,6 @@ int main() {
                 cout << weights[j].weight << " " << weights[j].value << "\n";
             }
         }
+//        cout << bestIndividual.totalValue << "\n";
     }
 }
