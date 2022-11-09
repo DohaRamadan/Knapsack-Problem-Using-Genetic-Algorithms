@@ -156,7 +156,6 @@ Individual GA(){
 
 int main() {
     freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
     int t;
     cin >> t;
     for (int i = 0; i < t; ++i) {
@@ -167,13 +166,11 @@ int main() {
                 selectedItems++;
             }
         }
-        cout << "test case " << i+1 << ": " << "number of selected items: " << selectedItems << ", total value: " << bestIndividual.totalValue << "\n";
-        cout << "weight and value of each selected item: \n";
+        cout << "test case " << i+1 << ": " << "number of selected items: " << selectedItems << ", total weight: " << bestIndividual.totalWeight <<  ", total value: " << bestIndividual.totalValue << "\n";
         for (int j = 0; j < bestIndividual.chromosome.size(); ++j) {
             if(bestIndividual.chromosome[j] == 1){
-                cout << weights[j].weight << " " << weights[j].value << "\n";
+                cout <<"Item " << j+1 << ": weight: " <<weights[j].weight << ", value: " << weights[j].value << "\n";
             }
         }
-//        cout << bestIndividual.totalValue << "\n";
     }
 }
