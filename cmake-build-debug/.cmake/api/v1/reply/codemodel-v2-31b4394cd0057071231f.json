@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "SoftComputingAss1",
+					"name" : "Knapsack_Problem_Using_Genetic_Algorithms",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "SoftComputingAss1::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-SoftComputingAss1-Debug-b8b44733eb4e2a411444.json",
-					"name" : "SoftComputingAss1",
+					"id" : "Knapsack_Problem_Using_Genetic_Algorithms::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Knapsack_Problem_Using_Genetic_Algorithms-Debug-f3e5122b9a56fde52bdc.json",
+					"name" : "Knapsack_Problem_Using_Genetic_Algorithms",
 					"projectIndex" : 0
 				}
 			]

@@ -1,0 +1,3 @@
+C:/Users/DOHA/Documents/GitHub/Knapsack-Problem-Using-Genetic-Algorithms/cmake-build-debug/CMakeFiles/Knapsack_Problem_Using_Genetic_Algorithms.dir
+C:/Users/DOHA/Documents/GitHub/Knapsack-Problem-Using-Genetic-Algorithms/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/DOHA/Documents/GitHub/Knapsack-Problem-Using-Genetic-Algorithms/cmake-build-debug/CMakeFiles/rebuild_cache.dir
