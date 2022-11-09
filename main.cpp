@@ -6,10 +6,14 @@ using namespace std;
 
 vector<pair<int, int>> weights;
 // pair of chromosome and it's fitness
-vector<pair<vector<int>, int>> currentGeneration;
+vector<pair<vector<int>, int>> currentGeneration, offsprings;
 int knapscakWeight, itemsNum;
 const int POP_SIZE = 10, MAX_GENERATION = 20;
 const float PC = 0.6, PM = 0.1;
+
+bool sortByFitness(pair<vector<int>, int>& a, pair<vector<int>, int>& b){
+    return a.second > b.second;
+}
 
 vector<pair<vector<int>, int>> InitializePopulation(){
     vector<pair<vector<int>, int>> newGeneration;
@@ -64,27 +68,29 @@ pair<vector<int>, vector<int>> crossover(vector<int> parent1, vector<int> parent
     return {offspring1, offspring2};
 }
 
-void Mutation(vector<int> offspring){
-    for (int i = 0; i < itemsNum; ++i) {
-        // generating a random float between 1 and 0
-        float ri = (float)rand() / (float)RAND_MAX;
-        if(ri <= PM){
-            if(offspring[i]) offspring[i] = 0;
-            else offspring[i] = 1;
+void Mutation(){
+    for(int i=0; i<POP_SIZE; i++){
+        for (int j = 0; j < itemsNum; ++j) {
+            // generating a random float between 1 and 0
+            float ri = (float)rand() / (float)RAND_MAX;
+            if(ri <= PM){
+                if(offsprings[i].first[j]) offsprings[i].first[j] = 0;
+                else offsprings[i].first[j] = 1;
+            }
         }
     }
 }
 
 
-vector<pair<vector<int>, int>> RouletteWheelSelection(){
+void RouletteWheelSelection(){
     int totalFitness = 0;
     vector<int> cumlative_fitness(POP_SIZE);
     for (int i = 0; i < POP_SIZE; ++i) {
         totalFitness += currentGeneration[i].second;
         cumlative_fitness[i] = totalFitness;
     }
-    vector<pair<vector<int>, int>> offsprings;
-    for (int i = 0; i < POP_SIZE; ++i) {
+    offsprings.clear();
+    while (offsprings.size() < POP_SIZE) {
         int r1 =  (rand() % (totalFitness + 1));
         int r2 =  (rand() % (totalFitness + 1));
         int parent1 = lower_bound(cumlative_fitness.begin(), cumlative_fitness.end(), r1) - cumlative_fitness.begin();
@@ -100,11 +106,10 @@ vector<pair<vector<int>, int>> RouletteWheelSelection(){
             offsprings.push_back(currentGeneration[parent2]);
         }
     }
-    return offsprings;
 }
 
 
-void GA(){
+pair<vector<int>, int> GA(){
     cin >> knapscakWeight >> itemsNum;
     weights.resize(itemsNum);
     for (int i = 0; i < itemsNum; ++i) {
@@ -113,15 +118,33 @@ void GA(){
     currentGeneration = InitializePopulation();
     for (int i = 1; i < MAX_GENERATION; ++i) {
         evaluateFitness();
-        vector<pair<vector<int>, int>> offsprings = RouletteWheelSelection();
+        RouletteWheelSelection();
+        Mutation();
+        currentGeneration = offsprings;
     }
+    std::sort(currentGeneration.begin(), currentGeneration.end(), sortByFitness);
+    pair<vector<int>, int> bestIndividual = currentGeneration[0];
+    return bestIndividual;
 }
 
 int main() {
     freopen("input.txt", "r", stdin);
     int t;
     cin >> t;
-    while(t--){
-        GA();
+    for (int i = 0; i < t; ++i) {
+        pair<vector<int>, int> bestIndividual = GA();
+        int selectedItems = 0;
+        for (int j = 0; j < bestIndividual.first.size(); ++j) {
+            if(bestIndividual.first[j] == 1){
+                selectedItems++;
+            }
+        }
+        cout << "test case " << i+1 << ": " << "number of selected items: " << selectedItems << ", total value: " << bestIndividual.second << "\n";
+        cout << "weight and value of each selected item: \n";
+        for (int j = 0; j < bestIndividual.first.size(); ++j) {
+            if(bestIndividual.first[j] == 1){
+                cout << weights[j].weight << " " << weights[j].value << "\n";
+            }
+        }
     }
 }
