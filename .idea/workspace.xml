@@ -77,7 +77,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668001764049</updated>
-      <workItem from="1668001765576" duration="11057000" />
+      <workItem from="1668001765576" duration="13931000" />
     </task>
     <servers />
   </component>
@@ -103,6 +103,7 @@
         <watch expression="itemsNum" language="ObjectiveC" />
         <watch expression="POP_SIZE" language="ObjectiveC" />
         <watch expression="currentGeneration" language="ObjectiveC" />
+        <watch expression="offsprings" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
