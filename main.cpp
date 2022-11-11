@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <cmath>
+#include <algorithm>
 #include <iostream>
 #define weight first
 #define value second
@@ -26,7 +28,6 @@ vector<Individual> InitializePopulation(){
     while(newGeneration.size() < POP_SIZE){
         Individual v;
         v.chromosome.resize(itemsNum);
-        int weightSum = 0;
         for (int i = 0; i < weights.size(); ++i) {
             // generating a random float between 1 and 0
             float r = (float)rand() / (float)RAND_MAX;
@@ -56,7 +57,7 @@ void evaluateFitness(){
 
 }
 pair<Individual, Individual> crossover(Individual parent1, Individual parent2){
-    int r1 = 1 + (rand() % itemsNum - 1);
+    int r1 = 1 + (rand() % (itemsNum - 1));
     Individual offspring1, offspring2;
     offspring1.chromosome.resize(itemsNum);
     offspring2.chromosome.resize(itemsNum);
@@ -155,7 +156,8 @@ Individual GA(){
 }
 
 int main() {
-    freopen("input.txt", "r", stdin);
+    freopen("knapsack_input.txt", "r", stdin);
+    freopen("knapsack_output.txt", "w", stdout);
     int t;
     cin >> t;
     for (int i = 0; i < t; ++i) {
@@ -166,11 +168,12 @@ int main() {
                 selectedItems++;
             }
         }
-        cout << "test case " << i+1 << ": " << "number of selected items: " << selectedItems << ", total weight: " << bestIndividual.totalWeight <<  ", total value: " << bestIndividual.totalValue << "\n";
+        cout << "------ test case " << i+1 << " --------\n" << "number of selected items: " << selectedItems << "\ntotal weight: " << bestIndividual.totalWeight <<  "\ntotal value: " << bestIndividual.totalValue << "\n";
         for (int j = 0; j < bestIndividual.chromosome.size(); ++j) {
             if(bestIndividual.chromosome[j] == 1){
-                cout <<"Item " << j+1 << ": weight: " <<weights[j].weight << ", value: " << weights[j].value << "\n";
+                cout <<"{ Item " << j+1 << ": weight: " <<weights[j].weight << ", value: " << weights[j].value << " }\n";
             }
         }
+        cout << "\n";
     }
 }
